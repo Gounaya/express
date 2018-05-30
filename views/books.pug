@@ -1,0 +1,24 @@
+extends booklayout
+
+append headblock
+  script(src='/javascripts/bookdetails.js')
+
+block bookcontent
+  h1= title
+  p Welcome to #{title.toLowerCase()}
+  table.booklist
+    each book in books
+      tr.book(data-id= book.id)
+        td.author= book.author
+        td.title
+          input(value= book.title, data-id= book.id)
+    // adding an entry for a non existing book to have 404 error with fetch
+    tr.book(data-id= 5)
+      td.author Personne
+      td.title Aucun
+  #details
+    +createCover('/images/book.png')
+    | Details :
+    .title
+    .author
+    .year
